@@ -2,43 +2,39 @@ def get_book_text():
     with open("books/frankenstein.txt") as f:
         return f.read()
 
-def word_counter():
-    text = get_book_text()
-    word_list = text.split()
+def word_counter(book_text):
+    word_list = book_text.split()
     counter = 0
     for word in word_list:
         counter+=1
-    print(f"{counter} words found in the document")
+    return f"Found {counter} total words"
 
-def char_counter():
-    counter_dict = {
-        'a' : 0,
-        'b' : 0,
-        'c' : 0,
-        'd' : 0,
-        'e' : 0,
-        'f' : 0,
-        'g' : 0,
-        'h' : 0,
-        'i' : 0,
-        'j' : 0,
-        'k' : 0,
-        'l' : 0,
-        'm' : 0,
-        'n' : 0,
-        'o' : 0,
-        'p' : 0,
-        'q' : 0,
-        'r' : 0,
-        's' : 0,
-        't' : 0,
-        'u' : 0,
-        'v' : 0,
-        'w' : 0,
-        'x' : 0,
-        'y' : 0,
-        'z' : 0,
-    }
-    text = get_book_text().lower()
-    
-    pass
+def char_counter(book_text):
+    counter_dict = {}
+    text = book_text.lower()
+    fakenum = 0
+    for char in text:
+        if char.isalpha() == True:
+            if char in counter_dict:
+                counter_dict[char]+=1
+            else:
+                counter_dict[char]=1
+        else:
+            fakenum+=1
+    return(counter_dict)
+
+def sorter(my_dict):
+    return my_dict["num"]
+
+def char_counter_sort(counter_dict):
+    dict_list = []
+    for entry in counter_dict:
+        new_dict = {"letter": entry, "num": counter_dict[entry]}
+        dict_list.append(new_dict)
+    dict_list.sort(reverse=True, key=sorter)
+    #print(dict_list)
+    return dict_list
+
+def report(dict_list):
+    for entry in dict_list:
+        print(f"{entry['letter']}: {entry['num']}")
