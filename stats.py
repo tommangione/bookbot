@@ -1,5 +1,5 @@
-def get_book_text():
-    with open("books/frankenstein.txt") as f:
+def get_book_text(book_path):
+    with open(book_path) as f:
         return f.read()
 
 def word_counter(book_text):
